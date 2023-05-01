@@ -54,132 +54,121 @@ const Cancellations = ({ loading, setLoading }) => {
           </div>
         </div>
       ) : (
-        <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-col text-center w-full mb-20">
-            <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">
-              YOUR CANCELLATIONS
-            </h1>
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-              order cancellations decrease your account trust
-            </p>
-          </div>
-          <div class="lg:w-3/4  mx-auto overflow-auto p-4">
-            <table class="table-auto bg-white rounded-xl   w-full text-left whitespace-no-wrap">
-              <thead className="border-b border-gray-200">
-                <tr>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm  rounded-tl rounded-bl">
-                    #Order Id
-                  </th>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
-                    Customer
-                  </th>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
-                    Products
-                  </th>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
-                    Delivery Date
-                  </th>
-                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
-                    Amount
-                  </th>
-                  <th class="px-4 py-3 text-center title-font tracking-wider font-medium text-gray-800 text-sm ">
-                    Order Status
-                  </th>
-                  <th class="px-4 py-3 text-center title-font tracking-wider font-medium text-gray-800 text-sm  rounded-tr rounded-br">
-                    Payment Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders?.map((order) => {
-                  // console.log(order);
-                  const {
-                    _id,
-                    ordered_by,
-                    products,
-                    order_status,
-                    payment_status,
-                    totalprice,
-                  } = order;
-                  return (
-                    <tr key={_id}>
-                      <Link href={`/orders/${_id}`}>
-                        <td class="px-4 py-3 text-gray-500 text-base">
-                          #{_id.slice(0, 10)}..
+        orders?.length > 0 && (
+          <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-col text-center w-full mb-20">
+              <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">
+                YOUR CANCELLATIONS
+              </h1>
+              <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+                your cancelled orders are here
+              </p>
+            </div>
+            <div class="lg:w-3/4  mx-auto overflow-auto sm:p-4 p-0">
+              <table class="table-auto bg-white rounded-xl   w-full text-left whitespace-no-wrap">
+                <thead className="border-b border-gray-200">
+                  <tr>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm  rounded-tl rounded-bl">
+                      #Order Id
+                    </th>
+                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
+                      Products
+                    </th>
+                    <th class="px-4 lg:block hidden py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
+                      Amount
+                    </th>
+                    <th class="px-4 py-3 text-center title-font tracking-wider font-medium text-gray-800 text-sm ">
+                      status
+                    </th>
+                    <th class="px-4 sm:block hidden py-3 text-center title-font tracking-wider font-medium text-gray-800 text-sm  rounded-tr rounded-br">
+                      Payment 
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders?.map((order) => {
+                    // console.log(order);
+                    const {
+                      _id,
+                      ordered_by,
+                      products,
+                      order_status,
+                      payment_status,
+                      totalprice,
+                    } = order;
+                    return (
+                      <tr key={_id}>
+                        <Link href={`/orders/${_id}`}>
+                          <td class="px-4 py-3 text-gray-500 text-xs">
+                            #{_id.slice(0, 10)}..
+                          </td>
+                        </Link>
+                        <td class="px-4 text-sm py-3 text-gray-500">
+                          {products?.map((product) => {
+                            return <span>{product.name}</span>;
+                          })}
                         </td>
-                      </Link>
-
-                      <td class="px-4 text-base py-3 text-gray-900">
-                        {ordered_by}
-                      </td>
-                      <td class="px-4 text-base py-3 text-gray-500">
-                        {products?.map((product) => {
-                          return <span>{product.name}</span>;
-                        })}
-                      </td>
-                      <td class="px-4 text-base py-3 text-gray-500">
-                        {Date.UTC}
-                      </td>
-                      <td class="px-4 text-base py-3 text-gray-500 text-center">
-                        <span className="text-sm text-gray-700">$</span>
-                        {totalprice}
-                      </td>
-                      <td class="px-4 text-center text-base py-3 text-gray-500">
-                        {" "}
-                        {order?.order_status === "completed" && (
-                          <span className="p-1 text-sm bg-green-100/60 font-semibold text-green-500 rounded-md px-4 py-1">
-                            completed
-                          </span>
-                        )}
-                        {order?.order_status === "pending" && (
-                          <span className="p-1 text-sm bg-yellow-100/60 font-semibold text-yellow-500 rounded-md px-4 py-1">
-                            Pending
-                          </span>
-                        )}
-                        {order?.order_status === "processing" && (
-                          <span className="p-1 text-sm bg-blue-100/60 font-semibold text-blue-500 rounded-md px-4 py-1">
-                            Processing
-                          </span>
-                        )}
-                        {order?.order_status === "cancelled" && (
-                          <span className="p-1 text-sm bg-red-100/60 font-semibold text-red-500 rounded-md px-4 py-1">
-                            Cancelled
-                          </span>
-                        )}
-                      </td>
-                      <td class="px-4 py-3 text-center">
-                        {" "}
-                        {order?.payment_status === "paid" && (
-                          <span className="p-1 text-sm bg-green-100/60 font-semibold text-green-500 rounded-md px-4 py-1">
-                            Paid
-                          </span>
-                        )}
-                        {order?.payment_status === "pending" && (
-                          <span className="p-1 text-sm bg-yellow-100/60 font-semibold text-yellow-500 rounded-md px-4 py-1">
-                            Pending
-                          </span>
-                        )}
-                        {order?.payment_status === "unpaid" && (
-                          <span className="p-1 text-sm bg-red-100/60 font-semibold text-red-500 rounded-md px-4 py-1">
-                            unpaid
-                          </span>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                        <td class="px-4 lg:block hidden text-base py-3 text-gray-500 text-center">
+                          <span className="text-sm text-gray-700">$</span>
+                          {totalprice}
+                        </td>
+                        <td class="px-4 text-center text-sm py-3 text-gray-500">
+                          {" "}
+                          {order?.order_status === "completed" && (
+                            <span className="p-1 text-sm bg-green-100/60 font-semibold text-green-500 rounded-md px-4 py-1">
+                              completed
+                            </span>
+                          )}
+                          {order?.order_status === "pending" && (
+                            <span className="p-1 text-xs bg-yellow-100/60 font-semibold text-yellow-500 rounded-md px-2 py-1">
+                              Pending
+                            </span>
+                          )}
+                          {order?.order_status === "processing" && (
+                            <span className="p-1 text-xs bg-blue-100/60 font-semibold text-blue-500 rounded-md px-2 py-1">
+                              Processing
+                            </span>
+                          )}
+                          {order?.order_status === "cancelled" && (
+                            <span className="p-1 text-xs bg-red-100/60 font-semibold text-red-500 rounded-md px-2 py-1">
+                              Cancelled
+                            </span>
+                          )}
+                        </td>
+                        <td class="px-4 sm:block hidden py-3 text-center">
+                          {" "}
+                          {order?.payment_status === "paid" && (
+                            <span className="p-1 text-xs bg-green-100/60 font-semibold text-green-500 rounded-md px-2 py-1">
+                              Paid
+                            </span>
+                          )}
+                          {order?.payment_status === "pending" && (
+                            <span className="p-1 text-xs bg-yellow-100/60 font-semibold text-yellow-500 rounded-md px-2 py-1">
+                              Pending
+                            </span>
+                          )}
+                          {order?.payment_status === "unpaid" && (
+                            <span className="p-1 text-xs bg-red-100/60 font-semibold text-red-500 rounded-md px-2 py-1">
+                              unpaid
+                            </span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             <div class="flex pl-4 mt-4 lg:w-2/3 w-full ml-auto">
               <Link
-                href="/products"
-                class="flex ml-auto text-white bg-purple-500 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded"
+                href="/"
+                class="flex ml-auto text-white bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
               >
                 Continue Shopping
               </Link>
             </div>
+            </div>
           </div>
-        </div>
+        )
       )}
     </section>
   );

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import Head from "next/head"
 
 const Order = ({ loading, setLoading }) => {
   const router = useRouter();
@@ -65,10 +66,14 @@ const Order = ({ loading, setLoading }) => {
         <Loader />
       ) : (
         order && (
+
           <section className="text-gray-600  body-font overflow-hidden">
-            <div className="container bg-white rounded-2xl px-5 py-24 mx-auto my-8">
-              <div className="lg:w-full mx-auto justify-around flex flex-wrap">
-                <div className="w-1/3 bg-gray-50 rounded-lg p-4">
+            <Head>
+              <title>Admin - Order Page</title>
+            </Head>
+            <div className="container bg-white rounded-2xl sm:px-5 px-2 py-8 mx-auto my-8">
+              <div className="lg:w-full mx-auto justify-between flex flex-wrap">
+                <div className="lg:w-2/5 w-full bg-gray-50 rounded-lg p-4">
                   <span className="text-gray-700">Products</span>
                   <div className="flow-root">
                     <ul role="list" className="mt-2 divide-y divide-gray-200">
@@ -80,7 +85,7 @@ const Order = ({ loading, setLoading }) => {
                             key={i}
                             className="flex my-4 bg-white p-2 shadow-md rounded-sm"
                           >
-                            <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                            <div className="sm:h-24 sm:w-24 w-16 h-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                               <img
                                 src={img}
                                 alt={name}
@@ -93,13 +98,13 @@ const Order = ({ loading, setLoading }) => {
                                   <h3>
                                     <Link href={`/product/${_id}`}>{name}</Link>
                                   </h3>
-                                  <p className="ml-4">${price}</p>
+                                  <p className="ml-4 text-sm">${price}</p>
                                 </div>
                                 <div className="flex items-center justify-between gap-2 mt-4">
                                   <div>
                                     <p className="mt-1 text-sm text-gray-500">
                                       {color && <span>Color {color}</span>}
-                                      {size && <span>Size {size}</span>}
+                                      {size && <span> Size {size}</span>}
                                     </p>
                                   </div>
                                   <span className="text-sm text-yellow-500 hover:text-yellow-400">
@@ -120,7 +125,7 @@ const Order = ({ loading, setLoading }) => {
                     </ul>
                   </div>
                 </div>
-                <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 lg:px-6 mx-4 mt-6 lg:mt-0 bg-gray-50  rounded-lg">
+                <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 lg:px-6 p-4 mt-6 lg:mt-0 bg-gray-50  rounded-lg">
                   <h2 className="text-sm title-font text-gray-500 tracking-widest">
                     Order id #{order_id}
                   </h2>
@@ -162,7 +167,7 @@ const Order = ({ loading, setLoading }) => {
                     className="flex flex-wrap gap-2 w-full items-center justify-between mt-6"
                   >
                     {paymentStatus !== "paid" && (
-                      <div className="w-1/3 my-4">
+                      <div className="sm:w-1/3 w-full my-4">
                         <label htmlFor="" className="text-sm">
                           Payment Status
                         </label>
@@ -177,26 +182,26 @@ const Order = ({ loading, setLoading }) => {
                         >
                           <option
                             value={"unpaid"}
-                            className="flex ml-auto text-white bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
+                            className="flex ml-auto w-max text-white bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
                           >
                             Un Paid
                           </option>
                           <option
                             value={"pending"}
-                            className="flex ml-auto text-white bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
+                            className="flex ml-auto w-max text-white bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
                           >
                             Pending
                           </option>
                           <option
                             value={"paid"}
-                            className="flex ml-auto text-white bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
+                            className="flex ml-auto w-max text-white bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
                           >
                             Paid
                           </option>
                         </select>
                       </div>
                     )}
-                    <div className="w-1/3 my-4">
+                    <div className="sm:w-1/3 w-full my-4">
                       <label htmlFor="" className="text-sm">
                         Order Status
                       </label>
@@ -209,19 +214,19 @@ const Order = ({ loading, setLoading }) => {
                       >
                         <option
                           value={"processing"}
-                          className="flex ml-auto text-white bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
+                          className="flex ml-auto w-max text-white bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
                         >
                           Processing
                         </option>
                         <option
                           value={"pending"}
-                          className="flex ml-auto text-white bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
+                          className="flex ml-auto w-max text-white bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
                         >
                           Pending
                         </option>
                         <option
                           value={"completed"}
-                          className="flex ml-auto text-white bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
+                          className="flex ml-auto w-max text-white bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
                         >
                           Completed
                         </option>

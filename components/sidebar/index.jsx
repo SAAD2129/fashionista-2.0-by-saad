@@ -2,6 +2,7 @@
 
 import { HiX } from "react-icons/hi";
 import { useEffect, useState } from "react";
+import { CgMenuGridO } from "react-icons/cg";
 import Link from "next/link";
 // import Links
 import {
@@ -20,7 +21,9 @@ import {
 import { useRouter } from "next/router";
 import { BsBoxes } from "react-icons/bs";
 
-const Sidebar = ({open,setOpen}) => {
+const Sidebar = () => {
+    const [open,setOpen] = useState(false)
+
   const [pathname, setPathname] = useState("");
   const router = useRouter();
   useEffect(() => {
@@ -29,18 +32,26 @@ const Sidebar = ({open,setOpen}) => {
   const onClose = (e) => {
     setOpen(false);
   };
+
   return (
     <div
-      className={`sm:none w-80 duration-175 linear dark:!bg-navy-800 fixed !z-50 flex min-h-full flex-col bg-white pb-10 shadow-2xl shadow-white/5 transition-all dark:text-white md:!z-50 lg:!z-50 xl:!z-0 ${
-        true ? "translate-x-0" : "-translate-x-96"
+      className={`sm:none w-80 duration-175 linear dark:!bg-navy-800 fixed !z-50 flex min-h-full flex-col bg-white pb-10 shadow-2xl shadow-white/5 transition-all dark:text-white md:!z-50 lg:!z-50 xl:!z-0  ${
+        open ? "translate-x-0" : "-translate-x-96"
       }`}
     >
+
       <span
         className="absolute top-4 right-4 block cursor-pointer xl:hidden"
         onClick={()=>onClose()}
       >
         <HiX />
       </span>
+     {!open && <span
+        className="fixed top-2 -right-28 cursor-pointer "
+        onClick={()=>setOpen(true)}
+      >
+        <CgMenuGridO className="font-bold text-3xl text-yellow-400"/>
+      </span>} 
 
       <div className={`mx-auto mt-[50px] flex items-center`}>
         <p className="text-2xl">

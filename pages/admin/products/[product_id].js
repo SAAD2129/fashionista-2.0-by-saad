@@ -122,10 +122,10 @@ const ProductAdmin = ({ onChangeHandler, setLoading, loading }) => {
         {loading ? (
           <Loader />
         ) : (
-          <div className="min-h-screen m-12">
+          <div className="min-h-screen sm:m-12 my-12">
             <div className="grid lg:grid-cols-2 bg-white p-4">
               <form onSubmit={updateProduct}>
-                <div className={`my-2 w-3/4`}>
+                <div className={`my-2 sm:w-3/4 w-full`}>
                   <label
                     htmlFor={"p_name"}
                     className={`text-sm text-yellow-400 dark:text-white ${"ml-3 font-bold"}`}
@@ -145,7 +145,7 @@ const ProductAdmin = ({ onChangeHandler, setLoading, loading }) => {
                 `}
                   />
                 </div>
-                <div className={`my-2 w-3/4`}>
+                <div className={`my-2 sm:w-3/4 w-full`}>
                   <label
                     htmlFor={"price"}
                     className={`text-sm text-yellow-400 dark:text-white ${"ml-3 font-bold"}`}
@@ -165,7 +165,7 @@ const ProductAdmin = ({ onChangeHandler, setLoading, loading }) => {
                 `}
                   />
                 </div>
-                <div className={`my-2 w-3/4`}>
+                <div className={`my-2 sm:w-3/4 w-full`}>
                   <label
                     htmlFor={"price"}
                     className={`text-sm text-yellow-400 dark:text-white ${"ml-3 font-bold"}`}
@@ -185,7 +185,7 @@ const ProductAdmin = ({ onChangeHandler, setLoading, loading }) => {
                 `}
                   />
                 </div>
-                <div className={`my-2 w-3/4`}>
+                <div className={`my-2 sm:w-3/4 w-full`}>
                   <label
                     htmlFor={"price"}
                     className={`text-sm text-yellow-400 dark:text-white ${"ml-3 font-bold"}`}
@@ -209,7 +209,7 @@ const ProductAdmin = ({ onChangeHandler, setLoading, loading }) => {
                 `}
                   />
                 </div>
-                <div className={`my-2 w-3/4`}>
+                <div className={`my-2 sm:w-3/4 w-full`}>
                   <label
                     htmlFor={"price"}
                     className={`text-sm text-yellow-400 dark:text-white ${"ml-3 font-bold"}`}
@@ -235,7 +235,7 @@ const ProductAdmin = ({ onChangeHandler, setLoading, loading }) => {
                     {productState?.description}
                   </textarea>
                 </div>
-                <div className={`my-2 w-3/4`}>
+                <div className={`my-2 sm:w-3/4 w-full`}>
                   <input
                     type={"submit"}
                     value="Update"
@@ -246,7 +246,7 @@ const ProductAdmin = ({ onChangeHandler, setLoading, loading }) => {
                 </div>
               </form>
               <div>
-                <div className="flex gap-2 h-2/4">
+                <div className="flex gap-2 h-2/4 mb-16">
                   <div className="h-full">
                     <img
                       className="w-56 overflow-hidden cursor-pointer"
@@ -255,13 +255,13 @@ const ProductAdmin = ({ onChangeHandler, setLoading, loading }) => {
                     />
                   </div>
                   {product?.images.length > 1 && (
-                    <div className="grid grid-cols-2 gap-2 ">
+                    <div className="flex flex-wrap">
                       {product?.images.map((image, i) => {
                         return (
                           <img
                             onClick={() => setMainImage(image?.secret_url)}
                             key={image?.secret_url}
-                            className="w-24 cursor-pointer"
+                            className="sm:w-20 w-12 cursor-pointer m-2"
                             src={image?.secret_url}
                             alt={product?.name}
                           />
@@ -270,7 +270,7 @@ const ProductAdmin = ({ onChangeHandler, setLoading, loading }) => {
                     </div>
                   )}
                 </div>
-                <div className={`mt-8 w-3/4`}>
+                <div className={`mt-20 w-full sm:w-3/4`}>
                   <button
                     onClick={deleteProduct}
                     className={`bg-yellow-400 hover:bg-yellow-500 mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none text-white cursor-pointer font-semibold transition-all focus:border-yellow-400  "border-gray-200 dark:!border-white/10 dark:text-white"

@@ -2,7 +2,7 @@ import React, { useEffect,useState } from "react";
 import Sidebar from "@/components/sidebar";
 import Navbar from "./navbar";
 
-const Layout = ({ children,pathname,onOpenSidenav,open }) => {
+const Layout = ({ children,pathname,onOpenSidenav}) => {
   const [user,setUser] = useState({})
   const fetchUser = async (e) => {
     if(localStorage.getItem('token')){
@@ -26,7 +26,6 @@ const Layout = ({ children,pathname,onOpenSidenav,open }) => {
   };
   useEffect(()=>{
     fetchUser()
-    console.log(user)
   },[])
   return (
     <div className="">
@@ -38,7 +37,7 @@ const Layout = ({ children,pathname,onOpenSidenav,open }) => {
           display: none;
         }
       `}</style>
-      <Sidebar open={open}/>
+      <Sidebar />
       <main className="mx-[12px] h-full flex-none transition-all md:pr-2 xl:ml-[313px] p-8">
         <Navbar user={user} onOpenSidenav={onOpenSidenav} brandName={pathname} />
         {children}

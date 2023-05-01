@@ -23,10 +23,9 @@ const Header = ({
   const [dropdown, setDropdown] = useState(false);
   const newref = useRef();
   const [open, setOpen] = useState(false);
-  const [showNav, setShowNav] = useState(true);
+  const [showNav, setShowNav] = useState(false);
   const [token, setToken] = useState(null);
   const router = useRouter();
-  const [breadCrumbs, setBreadCrumbs] = useState([]);
 
   const goToCheckout = async () => {
     setOpen(false);

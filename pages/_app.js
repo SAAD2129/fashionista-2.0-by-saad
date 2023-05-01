@@ -196,11 +196,7 @@ export default function App({ Component, pageProps }) {
     localStorage.removeItem("token");
     router.push("/login");
   };
-  const [open, setOpen] = useState(true);
-  const onOpenSidenav = () => {
-    console.log('here')
-    setOpen(false);
-  };
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     // fetchUser();
     loadCart();
@@ -243,7 +239,6 @@ export default function App({ Component, pageProps }) {
         calculateSubTotal={calculateSubTotal}
         open={open}
         setOpen={setOpen}
-        onOpenSidenav={onOpenSidenav}
         fetchUser={fetchUser}
         user={user}
 
@@ -264,7 +259,6 @@ export default function App({ Component, pageProps }) {
         addToFavorite={addToFavorite}
         open={open}
         setOpen={setOpen}
-        onOpenSidenav={onOpenSidenav}
         favorites={favorites}
         removeFromFavorite={removeFromFavorite}
         cart={cart}

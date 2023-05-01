@@ -205,11 +205,11 @@ const AddProduct = ({ categories }) => {
       {console.log(productPreview)}
       <form
         onSubmit={addProduct}
-        className="!z-5 relative mx-auto  mt-8 flex w-3/4 gap-5  rounded-[20px] bg-white bg-clip-border p-[16px] shadow-3xl shadow-shadow-500 dark:!bg-yellow-400 dark:text-white dark:shadow-none "
+        className="!z-5 relative mx-auto  mt-8  flex md:flex-row flex-col w-full sm:w-3/4 gap-5  rounded-[20px] bg-white bg-clip-border p-[16px] shadow-3xl shadow-shadow-500 dark:!bg-yellow-400 dark:text-white dark:shadow-none "
       >
         <Card
           extra={
-            "w-2/4 h-full p-[16px] dark:!bg-yellow-400 dark:text-white dark:shadow-none "
+            "md:w-2/4 w-full  h-full p-[16px] dark:!bg-yellow-400 dark:text-white dark:shadow-none "
           }
         >
           {/* label, id, extra, type, placeholder, variant, state, disabled */}
@@ -430,7 +430,7 @@ const AddProduct = ({ categories }) => {
           )}
 
           {/* <SwitchField/> */}
-          <p className="mt-4">Select In stock colors</p>
+          {/* <p className="mt-4">Select In stock colors</p>
           <div className="my-1 flex justify-between">
             <span className="text-gray-600">Black</span>
             <Switch onChange={onChangeColors} id="black" color="yellow" />
@@ -475,7 +475,7 @@ const AddProduct = ({ categories }) => {
           <div className="my-1 flex justify-between">
             <span className="text-gray-600">XXXL</span>
             <Switch onChange={onChangeSizes} id="XXXL" color="yellow" />
-          </div>
+          </div> */}
         </Card>
       </form>
     </Layout>

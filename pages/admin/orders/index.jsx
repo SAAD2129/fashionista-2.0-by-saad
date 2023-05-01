@@ -72,9 +72,9 @@ const Orders = ({ loading, setLoading }) => {
               orderCategory === "all"
                 ? " border-yellow-400 text-yellow-400 transition-all"
                 : "border-gray-300 text-gray-500"
-            }  border-b-2 font-medium text-sm py-2`}
+            }  border-b-2 font-medium text-sm py-2 sm:px-4 px-1`}
           >
-            All Orders
+            All 
           </button>
         </li>
         <li>
@@ -84,7 +84,7 @@ const Orders = ({ loading, setLoading }) => {
               orderCategory === "completed"
                 ? " border-yellow-400 text-yellow-400 transition-all"
                 : "border-gray-300 text-gray-500"
-            }  border-b-2 font-medium text-sm py-2 px-4`}
+            }  border-b-2 font-medium text-sm py-2 sm:px-4 px-1`}
           >
             Completed
           </button>
@@ -96,7 +96,7 @@ const Orders = ({ loading, setLoading }) => {
               orderCategory === "pending"
                 ? " border-yellow-400 text-yellow-400 transition-all"
                 : "border-gray-300 text-gray-500"
-            }  border-b-2 font-medium text-sm py-2 px-4`}
+            }  border-b-2 font-medium text-sm py-2 sm:px-4 px-1`}
           >
             Pending
           </button>
@@ -108,7 +108,7 @@ const Orders = ({ loading, setLoading }) => {
               orderCategory === "processing"
                 ? " border-yellow-400 text-yellow-400 transition-all"
                 : "border-gray-300 text-gray-500"
-            }  border-b-2 font-medium text-sm py-2 px-4`}
+            }  border-b-2 font-medium text-sm py-2 sm:px-4 px-1`}
           >
             Processing
           </button>
@@ -127,7 +127,7 @@ const Orders = ({ loading, setLoading }) => {
         </li>
       </ul>
       <div className="flex my-4  p-4 bg-white justify-between item-center w-full items-center shadd rounded-lg">
-        <div className="flex rounded-md shadow-sm w-2/4 px-2 bg-white border border-gray-200 items-center  sm:max-w-md">
+        <div className="flex rounded-md shadow-sm w-3/4 px-2 bg-white border border-gray-200 items-center  sm:max-w-md">
           <FaSearch className="text-gray-400" />
           <input
             type="text"
@@ -136,20 +136,11 @@ const Orders = ({ loading, setLoading }) => {
             value={querySearch}
             id="querySearch"
             autoComplete="off"
-            className="w-full rounded border-0   bg-opacity-50 px-3 py-1 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out  bg-transparent "
-            placeholder="Search order id , customer and order status"
+            className="w-3/4 sm:w-full  rounded border-0   bg-opacity-50 px-3 py-1 text-sm leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out  bg-transparent "
+            placeholder="Search order id, customer and order status"
           />
         </div>
-        <div className="w-1/4 flex items-center justify-end gap-4">
-          <button className="flex items-center gap-2 justify-center rounded-md border border-gray-200 px-3 py-1 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out  bg-white">
-            <BiFilter />
-            <span>Filters</span>
-          </button>
-          <button className="flex items-center gap-2 justify-center rounded-md border border-gray-200 px-3 py-1 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out  bg-white">
-            <MdAttachFile />
-            <span>Attach</span>
-          </button>
-        </div>
+        
       </div>
       {loading ? (
         <Loader />
@@ -170,9 +161,6 @@ const Orders = ({ loading, setLoading }) => {
                 </th>
                 <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
                   Products
-                </th>
-                <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
-                  Delivery Date
                 </th>
                 <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
                   Amount
@@ -202,27 +190,24 @@ const Orders = ({ loading, setLoading }) => {
                 return (
                   <tr key={_id}>
                     <Link href={`/admin/orders/${_id}`}>
-                      <td class="px-4 py-3 text-gray-500 text-base">
+                      <td class="px-4 py-3 text-gray-500 text-sm">
                         #{_id.slice(0, 10)}..
                       </td>
                     </Link>
 
-                    <td class="px-4 text-base py-3 text-gray-900">
+                    <td class="px-4 text-sm py-3 text-gray-900">
                       {ordered_by}
                     </td>
-                    <td class="px-4 text-base py-3 text-gray-500">
+                    <td class="px-4 text-sm py-3 text-gray-500">
                       {products?.map((product) => {
                         return <span>{product.name}</span>;
                       })}
                     </td>
-                    <td class="px-4 text-base py-3 text-gray-500">
-                      {Date.UTC}
-                    </td>
-                    <td class="px-4 text-base py-3 text-gray-500 text-center">
+                    <td class="px-4 text-sm py-3 text-gray-500 text-center">
                       <span className="text-sm text-gray-700">$</span>
                       {totalprice}
                     </td>
-                    <td class="px-4 text-center text-base py-3 text-gray-500">
+                    <td class="px-4 text-center text-sm py-3 text-gray-500">
                       {" "}
                       {order?.order_status === "completed" && (
                         <span className="p-1 text-sm bg-green-100/60 font-semibold text-green-500 rounded-md px-4 py-1">
@@ -263,7 +248,7 @@ const Orders = ({ loading, setLoading }) => {
                         </span>
                       )}
                     </td>
-                    <td class="px-4 text-right text-base py-3 text-gray-500">
+                    <td class="px-4 text-right text-sm py-3 text-gray-500">
                       <Link href={`/admin/orders/${_id}`}>
                         <FaPencilAlt className="mx-auto hover:text-yellow-400 transition-all cursor-pointer" />
                       </Link>
