@@ -8,6 +8,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import { MdRemoveShoppingCart } from "react-icons/md";
+import { GiHamburgerMenu } from "react-icons/gi";
 const Header = ({
   cart,
   subtotal,
@@ -22,19 +23,10 @@ const Header = ({
   const [dropdown, setDropdown] = useState(false);
   const newref = useRef();
   const [open, setOpen] = useState(false);
+  const [showNav, setShowNav] = useState(true);
   const [token, setToken] = useState(null);
   const router = useRouter();
   const [breadCrumbs, setBreadCrumbs] = useState([]);
-  const toggleFavorate = async () => {
-    // setShowcart(!showcart);
-    if (newref.current.classList.contains("-translate-x-full")) {
-      newref.current.classList.remove("-translate-x-full");
-      newref.current.classList.add("translate-x-0");
-    } else {
-      newref.current.classList.add("-translate-x-full");
-      newref.current.classList.remove("translate-x-0");
-    }
-  };
 
   const goToCheckout = async () => {
     setOpen(false);
@@ -46,77 +38,254 @@ const Header = ({
     const token = localStorage.getItem("token");
     setToken(token);
     // console.log(user);
-    fetchUser()
+    fetchUser();
   }, [cart, router.pathname]);
 
   return (
     <>
-      <Transition.Root show={true} as={Fragment}>
-        <Dialog as="div" className="relative z-50" onClose={setOpen}>
+      <Transition.Root show={showNav} as={Fragment}>
+        <Dialog as="div" className="relative z-50" onClose={setShowNav}>
           <Transition.Child
-              as={Fragment}
-              enter="ease-in-out duration-500"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="ease-in-out duration-500"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
+            as={Fragment}
+            enter="ease-in-out duration-500"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in-out duration-500"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
             <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-hidden">
             <div className="absolute inset-0 overflow-hidden">
-              <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+              <div className="pointer-events-none fixed inset-y-0 left-0 flex max-w-full">
                 <Transition.Child
-                    as={Fragment}
-                    enter="transform transition ease-in-out duration-500 sm:duration-700"
-                    enterFrom="translate-x-full"
-                    enterTo="translate-x-0"
-                    leave="transform transition ease-in-out duration-500 sm:duration-700"
-                    leaveFrom="translate-x-0"
-                    leaveTo="translate-x-full"
+                  as={Fragment}
+                  enter="transform transition ease-in-out duration-500 sm:duration-700"
+                  enterFrom="-translate-x-full"
+                  enterTo="translate-x-0"
+                  leave="transform transition ease-in-out duration-500 sm:duration-700"
+                  leaveFrom="translate-x-0"
+                  leaveTo="-translate-x-full"
                 >
                   <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                    <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                      <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-                        <div className="flex items-start justify-between">
+                    <div className="flex h-full flex-col  bg-white shadow-xl">
+                      <div className="flex-1  px-4 py-6 sm:px-6">
+                        <div className="flex mb-8 items-start justify-between">
                           <Dialog.Title className="text-lg font-medium text-gray-900">
-                            Shopping cart
+                            <Link href="/">
+                              <h2 className="text-2xl text-yellow-400 font-bold">
+                                Fashionista
+                              </h2>
+                            </Link>
                           </Dialog.Title>
                           <div className="ml-3 flex h-7 items-center">
                             <button
-                                type="button"
-                                className="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                                onClick={() => setOpen(false)}
+                              type="button"
+                              className="-m-2 p-2 text-gray-400 hover:text-gray-500"
+                              onClick={() => setShowNav(false)}
                             >
                               <span className="sr-only">Close panel</span>
                               <XMarkIcon
-                                  className="h-6 w-6"
-                                  aria-hidden="true"
+                                className="h-6 w-6"
+                                aria-hidden="true"
                               />
                             </button>
                           </div>
                         </div>
-
-                      </div>
-
-
-                      <div>
-                        <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                          <p>
+                        <ul
+                          role="list"
+                          className="py-1 font-medium text-gray-900"
+                        >
+                          <li>
                             <Link
-                                href={"/"}
-                                type="button"
-                                className="font-medium mb-4 text-yellow-400 hover:text-yellow-500"
-                                onClick={() => setOpen(false)}
+                              href="/products"
+                              className={`${
+                                router.pathname === "/cancellations"
+                                  ? "text-gray-70"
+                                  : "text-gray-700"
+                              } hover:bg-yellow-50 block px-4 py-2 text-sm`}
+                              type="button"
                             >
-                              {" "}
-                              Continue Shopping
-                              <span aria-hidden="true"> &rarr;</span>
+                              Products
                             </Link>
-                          </p>
-                        </div>
+                          </li>
+                          <li>
+                            <Link
+                              href="/about"
+                              className={`${
+                                router.pathname === "/cancellations"
+                                  ? "text-gray-70"
+                                  : "text-gray-700"
+                              } hover:bg-yellow-50 block px-4 py-2 text-sm`}
+                              type="button"
+                            >
+                              About
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              href="/faq"
+                              className={`${
+                                router.pathname === "/cancellations"
+                                  ? "text-gray-70"
+                                  : "text-gray-700"
+                              } hover:bg-yellow-50 block px-4 py-2 text-sm`}
+                              type="button"
+                            >
+                              Faq
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              href="/contact"
+                              className={`${
+                                router.pathname === "/cancellations"
+                                  ? "text-gray-70"
+                                  : "text-gray-700"
+                              } hover:bg-yellow-50 block px-4 py-2 text-sm`}
+                              type="button"
+                            >
+                              Contact
+                            </Link>
+                          </li>
+                          <li>
+                            {user?.role === "admin" && (
+                              <Link
+                                href="/admin"
+                                onClick={() => {
+                                  setDropdown(false);
+                                }}
+                                className={`${
+                                  router.pathname === "/admin"
+                                    ? "text-gray-70"
+                                    : "text-gray-700"
+                                } hover:bg-yellow-50 block px-4 py-2 text-sm`}
+                                role="menuitem"
+                                tabIndex="-1"
+                                id="menu-item-0"
+                              >
+                                Dashboard
+                              </Link>
+                            )}
+                          </li>
+                          <li>
+                            {!token && (
+                              <Link
+                                href="/login"
+                                onClick={() => {
+                                  setDropdown(false);
+                                }}
+                                className={`${
+                                  router.pathname === "/login"
+                                    ? "text-gray-70"
+                                    : "text-gray-700"
+                                } hover:bg-yellow-50 block px-4 py-2 text-sm`}
+                                role="menuitem"
+                                tabIndex="-1"
+                                id="menu-item-0"
+                              >
+                                Login
+                              </Link>
+                            )}
+                          </li>
+                          <li>
+                            <Link
+                              href="/orders"
+                              onClick={() => {
+                                setDropdown(false);
+                              }}
+                              className={`${
+                                router.pathname === "/orders"
+                                  ? "text-gray-70"
+                                  : "text-gray-700"
+                              } hover:bg-yellow-50 block px-4 py-2 text-sm`}
+                              role="menuitem"
+                              tabIndex="-1"
+                              id="menu-item-1"
+                            >
+                              Orders
+                            </Link>
+                          </li>
+
+                          <li>
+                            <Link
+                              href="/cancellations"
+                              onClick={() => {
+                                setDropdown(false);
+                              }}
+                              className={`${
+                                router.pathname === "/cancellations"
+                                  ? "text-gray-70"
+                                  : "text-gray-700"
+                              } hover:bg-yellow-50 block px-4 py-2 text-sm`}
+                              role="menuitem"
+                              tabIndex="-1"
+                              id="menu-item-2"
+                            >
+                              Cancellations
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              onClick={() => {
+                                setDropdown(false);
+                              }}
+                              href="/favorities"
+                              className={`${
+                                router.pathname === "/favorities"
+                                  ? "text-gray-70"
+                                  : "text-gray-700"
+                              } hover:bg-yellow-50 block px-4 py-2 text-sm`}
+                              role="menuitem"
+                              tabIndex="-1"
+                              id="menu-item-5"
+                            >
+                              Wishlist
+                            </Link>
+                          </li>
+                          <li>
+                            {token && (
+                              <div className="py-1" role="none">
+                                <a
+                                  className="text-gray-700 hover:bg-yellow-50 block px-4 py-2 text-sm"
+                                  role="menuitem"
+                                  tabIndex="-1"
+                                  id="menu-item-6"
+                                  onClick={() => {
+                                    setDropdown(false), logoutUser();
+                                  }}
+                                >
+                                  Logout
+                                </a>
+                              </div>
+                            )}
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="mt-auto px-4">
+                        <Link
+                          href="/myaccount"
+                          className={`flex items-center gap-2 ${
+                            router.pathname === "/orders"
+                              ? "text-gray-70"
+                              : "text-gray-700"
+                          } hover:bg-yellow-50 block px-4 py-2`}
+                        >
+                          {user?.profileImage?.secret_url ? (
+                            <div className="w-8 h-8 rounded-full">
+                              <img
+                                src={user?.profileImage?.secret_url}
+                                alt={user?.username}
+                                className="w-full h-full rounded-full"
+                              />
+                            </div>
+                          ) : (
+                            <BiUser className="text-2xl  hover:text-yellow-400 transition-all font-semibold text-black" />
+                          )}
+                          <span>Profile</span>
+                        </Link>
                       </div>
                     </div>
                   </Dialog.Panel>
@@ -311,9 +480,16 @@ const Header = ({
           </div>
         </Dialog>
       </Transition.Root>
-      <header className="px-44 bg-white py-2 lg:shadow-md  w-full flex justify-between top-0 z-10 mx-auto body-font">
+      <header className="lg:px-44 lg:py-2 p-0 bg-white lg:shadow-md  w-full flex justify-between top-0 z-10 mx-auto body-font">
         {/* SHOPPING CART */}
-        <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <div className="fixed top-2 cursor-pointer left-2">
+          <GiHamburgerMenu
+            className="text-yellow-300 text-3xl pointer lg:hidden block"
+            onClick={() => setShowNav(true)}
+          />
+        </div>
+
+        <div className="container  mx-auto lg:flex hidden flex-wrap p-5 flex-col md:flex-row items-center">
           <Link
             href={"/"}
             className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
@@ -348,7 +524,7 @@ const Header = ({
           </nav>
         </div>
 
-        <div className="flex items-center ">
+        <div className="lg:flex hidden items-center ">
           <button onClick={() => setOpen(true)} className="mx-2">
             <BiCart className="text-2xl hover:text-yellow-400 transition-all font-semibold text-black" />
           </button>
@@ -491,8 +667,7 @@ const Header = ({
                       tabIndex="-1"
                       id="menu-item-6"
                       onClick={() => {
-                        console.log("clicked");
-                        setDropdown(false), logoutUser();
+                        setShowNav(false), setDropdown(false), logoutUser();
                       }}
                     >
                       Logout

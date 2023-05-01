@@ -133,7 +133,7 @@ const MyOrder = ({ order_, loading, setLoading }) => {
                 CODESWEAR
               </h2>
               <h1 className="text-gray-900 my-6 rounded-2xl text-2xl title-font font-medium mb-4">
-                Order Id #{order?._id}
+                Order Id #{order?._id.slice(0,15)}
               </h1>
               <div className="flex mb-4">
                 <a
@@ -169,13 +169,13 @@ const MyOrder = ({ order_, loading, setLoading }) => {
               {showProducts && (
                 <div className={`main_orders transition-all`}>
                   <div className="flex border-b mb-8 border-gray-200 py-2">
-                    <span className="text-gray-900 text-xl  w-3/6">
+                    <span className="text-gray-900 sm:text-base text-sm w-3/6">
                       Products
                     </span>
-                    <span className="ml-auto text-xl  text-gray-900 w-1/4">
+                    <span className="ml-auto sm:text-base text-sm text-gray-900 w-1/4">
                       Quantity
                     </span>
-                    <span className="ml-auto text-xl  text-gray-900">
+                    <span className="ml-auto sm:text-base text-sm  text-gray-900">
                       Sub Total
                     </span>
                   </div>
@@ -192,9 +192,9 @@ const MyOrder = ({ order_, loading, setLoading }) => {
                         >
                           <p className="text-gray-500 w-2/4">
                             <div className="flex gap-2">
-                              <img src={img} alt={name} className="w-20" />
+                              <img src={img} alt={name} className="sm:w-20 w-12" />
                               <div>
-                                <span className="text-lg text-gray-600">
+                                <span className="sm:text-base text-sm text-gray-600">
                                   {name}
                                 </span>
                                 <p>
@@ -204,10 +204,10 @@ const MyOrder = ({ order_, loading, setLoading }) => {
                               </div>
                             </div>
                           </p>
-                          <span className="mx-auto text-gray-900 text-center">
+                          <span className="mx-auto sm:text-base text-sm text-gray-900 text-center">
                             {qty}
                           </span>
-                          <span className="ml-auto text-gray-900">
+                          <span className="ml-auto sm:text-base text-sm text-gray-900">
                             {qty} X ${price} = ${qty * price}
                           </span>
                         </div>
@@ -222,43 +222,37 @@ const MyOrder = ({ order_, loading, setLoading }) => {
                 !showProducts && (
                   <div className={`main_orders 3/4 transition-all`}>
                     <div className="flex border-b mb-8 border-gray-200 py-2">
-                      <span className="text-xl text-gray-900 w-1/5">
-                        User Email
+                      <span className=" text-gray-900 w-1/5">
+                      Name
                       </span>
-                      <span className="text-xl text-gray-900 w-1/5">
-                        User Name
+                      <span className=" text-gray-900 w-1/5">
+                        status
                       </span>
-                      <span className="text-xl text-gray-900 w-1/5">
-                        Order Status
+                      <span className=" text-gray-900 w-1/5">
+                        Payment
                       </span>
-                      <span className="text-xl text-gray-900 w-1/5">
-                        Payment Status
-                      </span>
-                      <span className="text-xl text-gray-900 w-1/5">
+                      <span className="text-right text-gray-900 w-2/5">
                         Total Price
                       </span>
                     </div>
                     {
-                      // return (
                       <div
                         key={_id}
                         className="flex  border-b mb-6 border-gray-200 py-2"
                       >
-                        <span className=" text-gray-900 w-1/5">{email}</span>
-                        <span className="ml- text-gray-900 w-1/5">
+                        <span className="text-sm text-gray-900 w-1/5">
                           {ordered_by}
                         </span>
-                        <span className="ml- text-gray-900 w-1/5">
+                        <span className="text-sm text-gray-900 w-1/5">
                           {order_status}
                         </span>
-                        <span className="ml- text-gray-900 w-1/5">
+                        <span className="text-sm text-gray-900 w-1/5">
                           {payment_status}
                         </span>
-                        <span className="font-medium text-gray-900 w-1/5">
+                        <span className="text-right font-medium text-gray-900 w-2/5">
                           ${totalprice}
                         </span>
                       </div>
-                      // );
                     }
                   </div>
                 )
@@ -268,7 +262,7 @@ const MyOrder = ({ order_, loading, setLoading }) => {
                 {order_status === "pending" || order_status === "processing" ? (
                   <button
                     onClick={() => setOpen(true)}
-                    className="w-1/4 m-auto text-white text-center bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
+                    className="sm:w-1/4 w-max m-auto  text-white text-center bg-yellow-400 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-500 rounded"
                   >
                     Cancel Order
                   </button>

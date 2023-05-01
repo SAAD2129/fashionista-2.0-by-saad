@@ -62,7 +62,7 @@ const Orders = ({ loading, setLoading }) => {
                 Hey! saad Thanks for shopping these are your orders
               </p>
             </div>
-            <div class="lg:w-3/4  mx-auto overflow-auto p-4">
+            <div class="lg:w-3/4  mx-auto overflow-auto sm:p-4 p-0">
               <table class="table-auto bg-white rounded-xl   w-full text-left whitespace-no-wrap">
                 <thead className="border-b border-gray-200">
                   <tr>
@@ -70,22 +70,16 @@ const Orders = ({ loading, setLoading }) => {
                       #Order Id
                     </th>
                     <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
-                      Customer
-                    </th>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
                       Products
                     </th>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
-                      Delivery Date
-                    </th>
-                    <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
+                    <th class="px-4 lg:block hidden py-3 title-font tracking-wider font-medium text-gray-800 text-sm ">
                       Amount
                     </th>
                     <th class="px-4 py-3 text-center title-font tracking-wider font-medium text-gray-800 text-sm ">
-                      Order Status
+                      status
                     </th>
-                    <th class="px-4 py-3 text-center title-font tracking-wider font-medium text-gray-800 text-sm  rounded-tr rounded-br">
-                      Payment Status
+                    <th class="px-4 sm:block hidden py-3 text-center title-font tracking-wider font-medium text-gray-800 text-sm  rounded-tr rounded-br">
+                      Payment 
                     </th>
                   </tr>
                 </thead>
@@ -103,27 +97,20 @@ const Orders = ({ loading, setLoading }) => {
                     return (
                       <tr key={_id}>
                         <Link href={`/orders/${_id}`}>
-                          <td class="px-4 py-3 text-gray-500 text-base">
+                          <td class="px-4 py-3 text-gray-500 text-xs">
                             #{_id.slice(0, 10)}..
                           </td>
                         </Link>
-
-                        <td class="px-4 text-base py-3 text-gray-900">
-                          {ordered_by}
-                        </td>
-                        <td class="px-4 text-base py-3 text-gray-500">
+                        <td class="px-4 text-sm py-3 text-gray-500">
                           {products?.map((product) => {
                             return <span>{product.name}</span>;
                           })}
                         </td>
-                        <td class="px-4 text-base py-3 text-gray-500">
-                          {Date.UTC}
-                        </td>
-                        <td class="px-4 text-base py-3 text-gray-500 text-center">
+                        <td class="px-4 lg:block hidden text-base py-3 text-gray-500 text-center">
                           <span className="text-sm text-gray-700">$</span>
                           {totalprice}
                         </td>
-                        <td class="px-4 text-center text-base py-3 text-gray-500">
+                        <td class="px-4 text-center text-sm py-3 text-gray-500">
                           {" "}
                           {order?.order_status === "completed" && (
                             <span className="p-1 text-sm bg-green-100/60 font-semibold text-green-500 rounded-md px-4 py-1">
@@ -131,35 +118,35 @@ const Orders = ({ loading, setLoading }) => {
                             </span>
                           )}
                           {order?.order_status === "pending" && (
-                            <span className="p-1 text-sm bg-yellow-100/60 font-semibold text-yellow-500 rounded-md px-4 py-1">
+                            <span className="p-1 text-xs bg-yellow-100/60 font-semibold text-yellow-500 rounded-md px-2 py-1">
                               Pending
                             </span>
                           )}
                           {order?.order_status === "processing" && (
-                            <span className="p-1 text-sm bg-blue-100/60 font-semibold text-blue-500 rounded-md px-4 py-1">
+                            <span className="p-1 text-xs bg-blue-100/60 font-semibold text-blue-500 rounded-md px-2 py-1">
                               Processing
                             </span>
                           )}
                           {order?.order_status === "cancelled" && (
-                            <span className="p-1 text-sm bg-red-100/60 font-semibold text-red-500 rounded-md px-4 py-1">
+                            <span className="p-1 text-xs bg-red-100/60 font-semibold text-red-500 rounded-md px-2 py-1">
                               Cancelled
                             </span>
                           )}
                         </td>
-                        <td class="px-4 py-3 text-center">
+                        <td class="px-4 sm:block hidden py-3 text-center">
                           {" "}
                           {order?.payment_status === "paid" && (
-                            <span className="p-1 text-sm bg-green-100/60 font-semibold text-green-500 rounded-md px-4 py-1">
+                            <span className="p-1 text-xs bg-green-100/60 font-semibold text-green-500 rounded-md px-2 py-1">
                               Paid
                             </span>
                           )}
                           {order?.payment_status === "pending" && (
-                            <span className="p-1 text-sm bg-yellow-100/60 font-semibold text-yellow-500 rounded-md px-4 py-1">
+                            <span className="p-1 text-xs bg-yellow-100/60 font-semibold text-yellow-500 rounded-md px-2 py-1">
                               Pending
                             </span>
                           )}
                           {order?.payment_status === "unpaid" && (
-                            <span className="p-1 text-sm bg-red-100/60 font-semibold text-red-500 rounded-md px-4 py-1">
+                            <span className="p-1 text-xs bg-red-100/60 font-semibold text-red-500 rounded-md px-2 py-1">
                               unpaid
                             </span>
                           )}
